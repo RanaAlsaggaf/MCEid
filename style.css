@@ -13,8 +13,10 @@ body {
 }
 
 .bg {
-  position: fixed;
-  inset: 0;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
   z-index: 0;
   background: linear-gradient(127deg, #450E72 1.12%, #344694 37.42%, #247D95 70.03%, #559C9D 93.89%);
   pointer-events: none;
