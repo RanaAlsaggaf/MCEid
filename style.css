@@ -146,6 +146,7 @@ body {
 /* Card sized to fit screen with room for buttons */
 #card-canvas {
   border-radius: 16px;
+  clip-path: inset(0 round 16px); 
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
   max-height: 65vh;
   max-width: min(420px, 90vw);
@@ -269,13 +270,13 @@ body {
 
 /* ===== MOBILE / RESPONSIVE ===== */
 @media (max-width: 768px) {
-  .title {
-    font-size: clamp(2.3rem, 6.5vw, 2.8rem);
-    line-height: 1.1;
-    text-align: center;
-    padding: 0 10px;
-    white-space: nowrap;
-  }
+.title {
+  font-size: clamp(2.3rem, 6.5vw, 2.8rem);
+  line-height: 1.1;
+  text-align: center;
+  padding: 0 10px;
+  white-space: nowrap;
+}
 
   #state-input {
     gap: 18px;
@@ -330,9 +331,10 @@ body {
 
 @media (max-width: 480px) {
   .title {
-    font-size: clamp(2.3rem, 6.5vw, 2.8rem);
+    font-size: clamp(1.45rem, 5.8vw, 1.95rem);
     line-height: 1.1;
     text-align: center;
+    margin: 0;
     padding: 0 10px;
     white-space: nowrap;
   }
