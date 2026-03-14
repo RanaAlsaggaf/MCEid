@@ -1,46 +1,57 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>معايدة مجتمع التصنيع</title>
-<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;700;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>معايدة مجتمع التصنيع</title>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-<div class="bg"></div>
+  <div class="bg"></div>
 
-<!-- State 1: Input -->
-<div id="state-input">
+  <!-- State 1: Input -->
+  <div id="state-input">
 
-  <h1 class="title">معايدة مجتمع التصنيع</h1>
+    <h1 class="title">معايدة مجتمع التصنيع</h1>
 
-  <div class="pill-wrapper">
-    <input class="pill-input" type="text" id="nameInput" placeholder="أكتب اسمك..." maxlength="25" autofocus>
-    <button class="pill-btn" onclick="generateCard()" title="أنشئ">→</button>
+    <div class="pill-wrapper">
+      <input class="pill-input" type="text" id="nameInput" placeholder="أكتب اسمك" maxlength="25" autofocus>
+      <button class="pill-btn" onclick="generateCard()" title="أنشئ">→</button>
+    </div>
   </div>
-</div>
 
-<!-- State 2: Result -->
-<div id="state-result">
-  <canvas id="card-canvas"></canvas>
-  <div class="btn-row">
-    <button class="action-btn" onclick="saveCard()">
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="white"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
-      حفظ الصورة
-    </button>
-    <button class="action-btn" onclick="goBack()">
-       تغيير الاسم
-    </button>
+  <!-- State 2: Result -->
+  <div id="state-result">
+    <canvas id="card-canvas"></canvas>
+    <div class="btn-row">
+      <button class="action-btn" onclick="saveCard()">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="white">
+          <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z" />
+        </svg>
+        حفظ الصورة
+      </button>
+      <button class="action-btn" onclick="goBack()">
+        تغيير الاسم
+      </button>
+    </div>
   </div>
-</div>
 
-
-
-<script src="script.js"></script>
-<footer class="footer">
-  جميع الحقوق محفوظة لمجتمع التصنيع 2026
+  <script src="script.js"></script>
+  <footer class="footer">
+    <a class="footer-link"
+      href="https://www.linkedin.com/in/rana-alsaggaf-47a407291?utm_source=share_via&utm_content=profile&utm_medium=member_ios"
+      target="_blank" rel="noopener noreferrer">
+      <div class="footer-content">
+        <span>صُنع بحب</span>
+        <img src="MCLogo.png" alt="logo" class="footer-logo">
+        <span>السقاف</span>
+      </div>
+    </a>
   </footer>
 </body>
+
 </html>
