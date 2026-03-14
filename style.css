@@ -382,4 +382,28 @@ body {
     }
 
   }
+  @media (max-width: 768px) {
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: auto;
+      min-height: 100dvh;
+      overflow-x: hidden;
+      background: transparent;
+    }
+  
+    body {
+      min-height: 100dvh;
+    }
+  
+    /* أهم سطر لحل الحواف */
+    .bg {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100dvh;
+    }
+  
+  }
 }
