@@ -270,12 +270,10 @@ body {
 /* ===== MOBILE / RESPONSIVE ===== */
 @media (max-width: 768px) {
   .title {
-    font-size: clamp(1.65rem, 6vw, 2.2rem);
+    font-size: clamp(2rem, 7vw, 2.6rem);
     line-height: 1.15;
     text-align: center;
-    margin: 0;
     padding: 0 12px;
-    max-width: 100%;
     white-space: nowrap;
   }
 
@@ -381,29 +379,5 @@ body {
       opacity: .12;
     }
 
-  }
-  @media (max-width: 768px) {
-
-    html, body {
-      margin: 0;
-      padding: 0;
-      height: auto;
-      min-height: 100dvh;
-      overflow-x: hidden;
-      background: transparent;
-    }
-  
-    body {
-      min-height: 100dvh;
-    }
-  
-    /* أهم سطر لحل الحواف */
-    .bg {
-      position: fixed;
-      inset: 0;
-      width: 100vw;
-      height: 100dvh;
-    }
-  
   }
 }
