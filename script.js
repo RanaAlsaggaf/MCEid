@@ -125,7 +125,7 @@ async function shareCard() {
       try {
         await navigator.share({
           files: [file],
-          title: 'معايدة عيد'
+          title: ' عيدـالتصنيع#'
         });
       } catch (err) {
         console.log('Share cancelled');
