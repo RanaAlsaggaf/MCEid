@@ -16,10 +16,7 @@ if (!sessionStorage.getItem('visitLogged')) {
     userAgent: navigator.userAgent || "",
     language: navigator.language || ""
   });
-  sessionStorage.setItem('visitLogged', 'true');
-}
 
-if (!sessionStorage.getItem('visitLogged')) {
   incrementStat('visits');
   sessionStorage.setItem('visitLogged', 'true');
 }
