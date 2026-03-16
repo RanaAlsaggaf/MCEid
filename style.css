@@ -251,6 +251,16 @@ body {
   width: 18px;
   height: 18px;
 }
+.social-bar a {
+  transition: all 0.25s ease;
+}
+
+.social-bar a:hover {
+  transform: translateY(-4px) scale(1.0);
+  background: rgba(255,255,255,0.25);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
 
 .footer {
   position: fixed;
@@ -503,7 +513,7 @@ body {
   }
 
   .social-bar {
-    bottom: 80px;
+    bottom: 65px;
   }
 
   .social-bar a {

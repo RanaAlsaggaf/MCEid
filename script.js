@@ -11,7 +11,7 @@ firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
 const bg = document.querySelector('.bg');
-const CARD_SRC = "EidCard/EidCard2.png";
+const CARD_SRC = "EidCard/EidCard3.png";
 const cardImg = new Image();
 cardImg.src = CARD_SRC;
 
@@ -65,22 +65,22 @@ function draw(name) {
   const ctx = canvas.getContext('2d');
   ctx.drawImage(cardImg, 0, 0, W, H);
 
-  const nameY = H * 0.85;
+  const nameY = H * 0.77;
   let fontSize = Math.floor(W * 0.05);
-  ctx.font = `700 ${fontSize}px Tajawal, Arial`;
+  ctx.font = `650 ${fontSize}px Tajawal, Arial`;
 
   while (ctx.measureText(name).width > W * 0.42 && fontSize > 22) {
     fontSize -= 2;
-    ctx.font = `700 ${fontSize}px Tajawal, Arial`;
+    ctx.font = `650 ${fontSize}px Tajawal, Arial`;
   }
 
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
-  ctx.shadowColor = 'rgba(0,0,0,0.18)';
-  ctx.shadowBlur = 8;
-  ctx.shadowOffsetY = 2;
+  ctx.shadowColor = 'rgba(0,0,0,0.05)';
+  ctx.shadowBlur = 2;
+  ctx.shadowOffsetY = 1;
   ctx.fillStyle = '#3D1164';
-  ctx.fillText(name, W * 0.51, nameY);
+  ctx.fillText(name, W * 0.67, nameY);
 
   ctx.shadowBlur = 0;
   ctx.shadowOffsetY = 0;
