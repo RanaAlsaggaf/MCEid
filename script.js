@@ -33,12 +33,13 @@ function generateCard() {
     document.getElementById('nameInput').focus();
     return;
   }
-
+  document.querySelector('.social-bar').style.display = 'none';
   saveNameToFirebase(name);
 
   document.querySelector('.footer').classList.add('hide');
   bg.classList.add('dim');
   document.getElementById('state-input').style.display = 'none';
+
 
   const result = document.getElementById('state-result');
   result.style.display = 'flex';
@@ -92,7 +93,7 @@ function draw(name) {
 function goBack() {
   bg.classList.remove('dim');
   document.getElementById('state-result').style.display = 'none';
-
+  document.querySelector('.social-bar').style.display = 'flex';
   const input = document.getElementById('state-input');
   input.style.display = 'flex';
 
@@ -125,7 +126,7 @@ async function shareCard() {
       try {
         await navigator.share({
           files: [file],
-          title: ' عيدـالتصنيع#'
+          title: ' ‫#عيد_التصنيع‬'
         });
       } catch (err) {
         console.log('Share cancelled');
