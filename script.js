@@ -18,6 +18,22 @@ if (!sessionStorage.getItem('visitLogged')) {
   });
   sessionStorage.setItem('visitLogged', 'true');
 }
+
+if (!sessionStorage.getItem('visitLogged')) {
+  incrementStat('visits');
+  sessionStorage.setItem('visitLogged', 'true');
+}
+
+async function incrementStat(fieldName) {
+  try {
+    await db.collection("stats").doc("counts").set({
+      [fieldName]: firebase.firestore.FieldValue.increment(1)
+    }, { merge: true });
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 const bg = document.querySelector('.bg');
 const CARD_SRC = "EidCard/EidCard3.png";
 const cardImg = new Image();
@@ -42,6 +58,7 @@ function generateCard() {
   }
   document.querySelector('.social-bar').style.display = 'none';
   trackEvent('generate');
+  incrementStat('generates');
   document.querySelector('.footer').classList.add('hide');
   bg.classList.add('dim');
   document.getElementById('state-input').style.display = 'none';
@@ -115,7 +132,7 @@ function goBack() {
 
 function saveCard() {
   trackEvent('download');
-
+  incrementStat('downloads');
   const name = document.getElementById('nameInput').value.trim() || 'بطاقة';
   const canvas = document.getElementById('card-canvas');
   const a = document.createElement('a');
@@ -126,7 +143,7 @@ function saveCard() {
 
 async function shareCard() {
   const canvas = document.getElementById('card-canvas');
-
+  incrementStat('shares');
   canvas.toBlob(async (blob) => {
     const file = new File([blob], 'eid-card.png', { type: 'image/png' });
 
