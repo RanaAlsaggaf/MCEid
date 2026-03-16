@@ -10,15 +10,22 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
+if (!sessionStorage.getItem('visitLogged')) {
+  db.collection('visits').add({
+    createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+    userAgent: navigator.userAgent || "",
+    language: navigator.language || ""
+  });
+  sessionStorage.setItem('visitLogged', 'true');
+}
 const bg = document.querySelector('.bg');
 const CARD_SRC = "EidCard/EidCard3.png";
 const cardImg = new Image();
 cardImg.src = CARD_SRC;
-
-async function saveNameToFirebase(name) {
+async function trackEvent(eventName) {
   try {
-    await db.collection("greetings").add({
-      name: name,
+    await db.collection("analytics").add({
+      event: eventName,
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
       userAgent: navigator.userAgent || "",
       language: navigator.language || ""
@@ -34,8 +41,7 @@ function generateCard() {
     return;
   }
   document.querySelector('.social-bar').style.display = 'none';
-  saveNameToFirebase(name);
-
+  trackEvent('generate');
   document.querySelector('.footer').classList.add('hide');
   bg.classList.add('dim');
   document.getElementById('state-input').style.display = 'none';
@@ -108,6 +114,8 @@ function goBack() {
 }
 
 function saveCard() {
+  trackEvent('download');
+
   const name = document.getElementById('nameInput').value.trim() || 'بطاقة';
   const canvas = document.getElementById('card-canvas');
   const a = document.createElement('a');
@@ -124,6 +132,7 @@ async function shareCard() {
 
     if (navigator.canShare && navigator.canShare({ files: [file] })) {
       try {
+        trackEvent('share');
         await navigator.share({
           files: [file],
           title: ' ‫#عيد_التصنيع‬'
