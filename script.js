@@ -20,7 +20,17 @@ if (!sessionStorage.getItem('visitLogged')) {
   incrementStat('visits');
   sessionStorage.setItem('visitLogged', 'true');
 }
-
+async function saveNameToFirebase(name) {
+  try {
+    await db.collection("greetings").add({
+      name: name,
+      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+      userAgent: navigator.userAgent || "",
+      language: navigator.language || ""
+    });
+  } catch (error) {
+  }
+}
 async function incrementStat(fieldName) {
   try {
     await db.collection("stats").doc("counts").set({
@@ -53,6 +63,7 @@ function generateCard() {
     document.getElementById('nameInput').focus();
     return;
   }
+  saveNameToFirebase(name);
   document.querySelector('.social-bar').style.display = 'none';
   trackEvent('generate');
   incrementStat('generates');
