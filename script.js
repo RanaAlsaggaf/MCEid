@@ -65,7 +65,6 @@ function generateCard() {
   }
   saveNameToFirebase(name);
   document.querySelector('.social-bar').style.display = 'none';
-  trackEvent('generate');
   incrementStat('generates');
   document.querySelector('.footer').classList.add('hide');
   bg.classList.add('dim');
@@ -139,7 +138,6 @@ function goBack() {
 }
 
 function saveCard() {
-  trackEvent('download');
   incrementStat('downloads');
   const name = document.getElementById('nameInput').value.trim() || 'بطاقة';
   const canvas = document.getElementById('card-canvas');
