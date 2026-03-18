@@ -59,13 +59,13 @@ async function trackEvent(eventName) {
   }
 }
 
-function generateCard() {
-  const name = document.getElementById('nameInput').value.trim();
+async function generateCard() {
+    const name = document.getElementById('nameInput').value.trim();
   if (!name) {
     document.getElementById('nameInput').focus();
     return;
   }
-  saveNameToFirebase(name);
+  await saveNameToFirebase(name);
   document.querySelector('.social-bar').style.display = 'none';
   incrementStat('generates');
   document.querySelector('.footer').classList.add('hide');
