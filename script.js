@@ -10,6 +10,18 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
+async function saveNameToFirebase(name) {
+  try {
+    await db.collection("greetings").add({
+      name: name,
+      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+      userAgent: navigator.userAgent || "",
+      language: navigator.language || ""
+    });
+  } catch (error) {
+  }
+}
+
 if (!sessionStorage.getItem('visitLogged')) {
   db.collection('visits').add({
     createdAt: firebase.firestore.FieldValue.serverTimestamp(),
@@ -20,19 +32,7 @@ if (!sessionStorage.getItem('visitLogged')) {
   incrementStat('visits');
   sessionStorage.setItem('visitLogged', 'true');
 }
-async function saveNameToFirebase(name) {
-  try {
-    await db.collection("greetings").add({
-      name: name,
-      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-      userAgent: navigator.userAgent || "",
-      language: navigator.language || ""
-    });
-    console.log("Name saved:", name);
-  } catch (error) {
-    console.error("Save name error:", error);
-  }
-}
+
 async function incrementStat(fieldName) {
   try {
     await db.collection("stats").doc("counts").set({
@@ -59,14 +59,14 @@ async function trackEvent(eventName) {
   }
 }
 
-async function generateCard() {
+function generateCard() {
     const name = document.getElementById('nameInput').value.trim();
   if (!name) {
     document.getElementById('nameInput').focus();
     return;
   }
-  await saveNameToFirebase(name);
-  document.querySelector('.social-bar').style.display = 'none';
+  saveNameToFirebase(name);
+    document.querySelector('.social-bar').style.display = 'none';
   incrementStat('generates');
   document.querySelector('.footer').classList.add('hide');
   bg.classList.add('dim');
