@@ -56,6 +56,7 @@ async function trackEvent(eventName) {
 
 async function generateCard() {
   const name = document.getElementById('nameInput').value.trim();
+
   if (!name) {
     document.getElementById('nameInput').focus();
     return;
@@ -63,9 +64,14 @@ async function generateCard() {
 
   try {
     await saveNameToFirebase(name);
+
+    // حل خاص لسفاري
+    await new Promise(resolve => setTimeout(resolve, 300));
+
     await incrementStat('generates');
+
   } catch (error) {
-    console.error('Firebase error:', error);
+    console.error("Firebase error:", error);
   }
 
   document.querySelector('.social-bar').style.display = 'none';
