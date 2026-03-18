@@ -28,7 +28,9 @@ async function saveNameToFirebase(name) {
       userAgent: navigator.userAgent || "",
       language: navigator.language || ""
     });
+    console.log("Name saved:", name);
   } catch (error) {
+    console.error("Save name error:", error);
   }
 }
 async function incrementStat(fieldName) {
