@@ -11,15 +11,12 @@ firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
 async function saveNameToFirebase(name) {
-  try {
-    await db.collection("greetings").add({
-      name: name,
-      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-      userAgent: navigator.userAgent || "",
-      language: navigator.language || ""
-    });
-  } catch (error) {
-  }
+  await db.collection("greetings").add({
+    name: name,
+    createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+    userAgent: navigator.userAgent || "",
+    language: navigator.language || ""
+  });
 }
 
 if (!sessionStorage.getItem('visitLogged')) {
@@ -34,13 +31,9 @@ if (!sessionStorage.getItem('visitLogged')) {
 }
 
 async function incrementStat(fieldName) {
-  try {
-    await db.collection("stats").doc("counts").set({
-      [fieldName]: firebase.firestore.FieldValue.increment(1)
-    }, { merge: true });
-  } catch (error) {
-    console.error(error);
-  }
+  await db.collection("stats").doc("counts").set({
+    [fieldName]: firebase.firestore.FieldValue.increment(1)
+  }, { merge: true });
 }
 
 const bg = document.querySelector('.bg');
@@ -56,22 +49,29 @@ async function trackEvent(eventName) {
       language: navigator.language || ""
     });
   } catch (error) {
+    console.error(error);
+
   }
 }
 
-function generateCard() {
-    const name = document.getElementById('nameInput').value.trim();
+async function generateCard() {
+  const name = document.getElementById('nameInput').value.trim();
   if (!name) {
     document.getElementById('nameInput').focus();
     return;
   }
-  saveNameToFirebase(name);
-    document.querySelector('.social-bar').style.display = 'none';
-  incrementStat('generates');
+
+  try {
+    await saveNameToFirebase(name);
+    await incrementStat('generates');
+  } catch (error) {
+    console.error('Firebase error:', error);
+  }
+
+  document.querySelector('.social-bar').style.display = 'none';
   document.querySelector('.footer').classList.add('hide');
   bg.classList.add('dim');
   document.getElementById('state-input').style.display = 'none';
-
 
   const result = document.getElementById('state-result');
   result.style.display = 'flex';
